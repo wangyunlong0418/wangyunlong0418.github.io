@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="node.js,">
+  <meta name="keywords" content="docker,">
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="鲁西西技术文档">
-<meta name="keywords" content="node.js">
+<meta name="description" content="docker 学习安装及启动 CenOs   1.通过yum安装：在CenOs7安装时，需要先添加docker下载源  vi /etc/yum.repo.d/docker.repo   12345678910[dockerrepo]    name=Docker Repository    baseurl=https://yum.dockerproject.org/repo/main/cento">
+<meta name="keywords" content="docker">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何搭建自己的技术文档">
-<meta property="og:url" content="http://yoursite.com/2018/12/12/如何搭建自己的技术文档/index.html">
+<meta property="og:title" content="docker学习系列笔记[安装及启动]">
+<meta property="og:url" content="http://yoursite.com/2018/12/13/docker学习系列笔记-一/index.html">
 <meta property="og:site_name" content="鲁西西杂货店">
-<meta property="og:description" content="鲁西西技术文档">
+<meta property="og:description" content="docker 学习安装及启动 CenOs   1.通过yum安装：在CenOs7安装时，需要先添加docker下载源  vi /etc/yum.repo.d/docker.repo   12345678910[dockerrepo]    name=Docker Repository    baseurl=https://yum.dockerproject.org/repo/main/cento">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-12-12T11:30:26.016Z">
+<meta property="og:updated_time" content="2018-12-13T08:40:04.728Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="如何搭建自己的技术文档">
-<meta name="twitter:description" content="鲁西西技术文档">
+<meta name="twitter:title" content="docker学习系列笔记[安装及启动]">
+<meta name="twitter:description" content="docker 学习安装及启动 CenOs   1.通过yum安装：在CenOs7安装时，需要先添加docker下载源  vi /etc/yum.repo.d/docker.repo   12345678910[dockerrepo]    name=Docker Repository    baseurl=https://yum.dockerproject.org/repo/main/cento">
 
 <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
 
@@ -139,13 +139,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/12/12/如何搭建自己的技术文档/">
+  <link rel="canonical" href="http://yoursite.com/2018/12/13/docker学习系列笔记-一/">
 
 
 
 
 
-  <title>如何搭建自己的技术文档 | 鲁西西杂货店</title>
+  <title>docker学习系列笔记[安装及启动] | 鲁西西杂货店</title>
   
 
 
@@ -264,7 +264,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/12/如何搭建自己的技术文档/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/13/docker学习系列笔记-一/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wangyunlong">
@@ -281,7 +281,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">如何搭建自己的技术文档</h1>
+          <h1 class="post-title" itemprop="name headline">docker学习系列笔记[安装及启动]</h1>
         
 
         <div class="post-meta">
@@ -293,8 +293,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-12T09:39:36+08:00">
-                2018-12-12
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-13T10:24:33+08:00">
+                2018-12-13
               </time>
             
 
@@ -353,7 +353,22 @@
       
 
       
-        
+        <h1 id="docker-学习"><a href="#docker-学习" class="headerlink" title="docker 学习"></a>docker 学习</h1><h2 id="安装及启动"><a href="#安装及启动" class="headerlink" title="安装及启动"></a>安装及启动</h2><ul>
+<li><p>CenOs</p>
+<p>  1.通过yum安装：在CenOs7安装时，需要先添加docker下载源<br>  vi /etc/yum.repo.d/docker.repo</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[dockerrepo]</span><br><span class="line">    name=Docker Repository</span><br><span class="line"></span><br><span class="line">    baseurl=https://yum.dockerproject.org/repo/main/centos/7/</span><br><span class="line"></span><br><span class="line">    enabled=1</span><br><span class="line"></span><br><span class="line">    gpgcheck=1</span><br><span class="line"></span><br><span class="line">    gpgkey=https://yum.dockerproject.org/gpg</span><br></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo yum update</span><br><span class="line">sudo yum install -y docker-engine</span><br></pre></td></tr></table></figure>
+<p>  2.通过脚本安装</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://get.docker.com/ | sh</span><br></pre></td></tr></table></figure>
+<p>  3.启动</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl start docker.service</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Mac <a href="https://store.docker.com/editions/community/docker-ce-desktop-mac" target="_blank" rel="noopener">下载地址</a></p>
+<p>  1.需注册后下载</p>
+<p>  2.启动（状态栏icon即可启动）</p>
+</li>
+</ul>
+
       
     </div>
     
@@ -381,7 +396,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/node-js/" rel="tag"># node.js</a>
+            <a href="/tags/docker/" rel="tag"># docker</a>
           
         </div>
       
@@ -394,15 +409,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/12/12/如何搭建自己的技术文档/" rel="next" title="如何搭建自己的技术文档">
+                <i class="fa fa-chevron-left"></i> 如何搭建自己的技术文档
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/12/13/docker学习系列笔记-一/" rel="prev" title="docker学习系列笔记[安装及启动]">
-                docker学习系列笔记[安装及启动] <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -454,8 +469,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -532,6 +556,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#docker-学习"><span class="nav-text">docker 学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装及启动"><span class="nav-text">安装及启动</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

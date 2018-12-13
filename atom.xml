@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-12-12T01:41:12.387Z</updated>
+  <updated>2018-12-13T08:40:04.728Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,18 +17,45 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>docker学习系列笔记[安装及启动]</title>
+    <link href="http://yoursite.com/2018/12/13/docker%E5%AD%A6%E4%B9%A0%E7%B3%BB%E5%88%97%E7%AC%94%E8%AE%B0-%E4%B8%80/"/>
+    <id>http://yoursite.com/2018/12/13/docker学习系列笔记-一/</id>
+    <published>2018-12-13T02:24:33.000Z</published>
+    <updated>2018-12-13T08:40:04.728Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="docker-学习"><a href="#docker-学习" class="headerlink" title="docker 学习"></a>docker 学习</h1><h2 id="安装及启动"><a href="#安装及启动" class="headerlink" title="安装及启动"></a>安装及启动</h2><ul><li><p>CenOs</p><p>  1.通过yum安装：在CenOs7安装时，需要先添加docker下载源<br>  vi /etc/yum.repo.d/docker.repo</p>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[dockerrepo]</span><br><span class="line">    name=Docker Repository</span><br><span class="line"></span><br><span class="line">    baseurl=https://yum.dockerproject.org/repo/main/centos/7/</span><br><span class="line"></span><br><span class="line">    enabled=1</span><br><span class="line"></span><br><span class="line">    gpgcheck=1</span><br><span class="line"></span><br><span class="line">    gpgkey=https://yum.dockerproject.org/gpg</span><br></pre></td></tr></table></figure>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo yum update</span><br><span class="line">sudo yum install -y docker-engine</span><br></pre></td></tr></table></figure><p>  2.通过脚本安装</p>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://get.docker.com/ | sh</span><br></pre></td></tr></table></figure><p>  3.启动</p>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl start docker.service</span><br></pre></td></tr></table></figure></li><li><p>Mac <a href="https://store.docker.com/editions/community/docker-ce-desktop-mac" target="_blank" rel="noopener">下载地址</a></p><p>  1.需注册后下载</p><p>  2.启动（状态栏icon即可启动）</p></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;docker-学习&quot;&gt;&lt;a href=&quot;#docker-学习&quot; class=&quot;headerlink&quot; title=&quot;docker 学习&quot;&gt;&lt;/a&gt;docker 学习&lt;/h1&gt;&lt;h2 id=&quot;安装及启动&quot;&gt;&lt;a href=&quot;#安装及启动&quot; class=&quot;header
+      
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
+    
+  </entry>
+  
+  <entry>
     <title>如何搭建自己的技术文档</title>
     <link href="http://yoursite.com/2018/12/12/%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/"/>
     <id>http://yoursite.com/2018/12/12/如何搭建自己的技术文档/</id>
     <published>2018-12-12T01:39:36.000Z</published>
-    <updated>2018-12-12T01:41:12.387Z</updated>
+    <updated>2018-12-12T11:30:26.016Z</updated>
     
     <summary type="html">
     
     </summary>
     
+      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
-      <category term="博客" scheme="http://yoursite.com/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+      <category term="node.js" scheme="http://yoursite.com/tags/node-js/"/>
     
   </entry>
   
