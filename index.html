@@ -264,7 +264,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/13/docker学习系列笔记-一/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/14/docker学习系列笔记-docker常用命令/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wangyunlong">
@@ -283,7 +283,315 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/12/13/docker学习系列笔记-一/" itemprop="url">docker学习系列笔记[安装及启动]</a></h1>
+                <a class="post-title-link" href="/2018/12/14/docker学习系列笔记-docker常用命令/" itemprop="url">docker学习系列笔记[docker常用命令]</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-14T12:01:44+08:00">
+                2018-12-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/docker学习/" itemprop="url" rel="index">
+                    <span itemprop="name">docker学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#查看当前docker版本<br>docker -v</p>
+<p>#查看当前本地所有镜像<br>docker images</p>
+<p>#构造镜像,用法docker build -t 镜像名称 .<br>docker build -t docker_demo .</p>
+<p>#用于容器与主机之间的数据拷贝。用法docker cp 主机文件地址 容器内地址。12d7f14v45cv为容器id。<br>docker cp /www/runoob 12d7f14v45cv:/www/</p>
+<p>#创建一个新的容器并运行，-d为后台执行，-p 9000:3000前面为主机端口，后面是容器端口。docker_demo镜像名<br>docker run -d -p 9000:3000 docker_demo</p>
+<p>#启动已被停止的容器<br>docker start docker_demo</p>
+<p>#关闭已被启动的容器<br>docker stop docker_demo</p>
+<p>#重新启动容器<br>docker restart docker_demo</p>
+<p>#杀掉一个运行中的容器。<br>docker kill -s KILL docker_demo</p>
+<p>#删除一个或多少容器。-f :通过SIGKILL信号强制删除一个运行中的容器-l :移除容器间的网络连接，而非容器本身-v :-v 删除与容器关联的卷<br>docker rm -f docker_demo、docker_demo1</p>
+<p>#在运行的容器中执行命令。104e28f2f072容器id<br>sudo docker exec -it 104e28f2f072 /bin/bash </p>
+<p>#列出容器。 -a:所有容器包含没有运行的<br>docker ps </p>
+<p>#获取容器获取容器的日志 104e28f2f072容器id，-t:显示时间戳<br>docker logs -f -t 104e28f2f072 </p>
+<p>#登陆镜像仓库<br>docker login</p>
+<p>#获取镜像<br>docker pull </p>
+<p>#上传镜像<br>docker push</p>
+<p>#查看指定镜像的创建历史。<br>docker history docker_demo</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/13/docker学习系列笔记-镜像-容器-仓库/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wangyunlong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="鲁西西杂货店">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/13/docker学习系列笔记-镜像-容器-仓库/" itemprop="url">docker学习系列笔记[镜像][容器][仓库]</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-13T18:27:46+08:00">
+                2018-12-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/docker学习/" itemprop="url" rel="index">
+                    <span itemprop="name">docker学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="镜像、容器、仓库"><a href="#镜像、容器、仓库" class="headerlink" title="镜像、容器、仓库"></a>镜像、容器、仓库</h1><h3 id="docker的核心概念————镜像、容器、仓库，docker大部分操作都是围绕这是三个概念做的"><a href="#docker的核心概念————镜像、容器、仓库，docker大部分操作都是围绕这是三个概念做的" class="headerlink" title="docker的核心概念————镜像、容器、仓库，docker大部分操作都是围绕这是三个概念做的"></a>docker的核心概念————镜像、容器、仓库，docker大部分操作都是围绕这是三个概念做的</h3><h2 id="镜像-images"><a href="#镜像-images" class="headerlink" title="镜像(images)"></a>镜像(images)</h2><pre><code>一个只读模板，可以理解为应用程序运行环境，包含程序运行时所依赖的环境和基本配置
+</code></pre><h2 id="容器-container"><a href="#容器-container" class="headerlink" title="容器(container)"></a>容器(container)</h2><h2 id="仓库-container"><a href="#仓库-container" class="headerlink" title="仓库(container)"></a>仓库(container)</h2>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/13/docker学习系列笔记[安装及启动]/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wangyunlong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="鲁西西杂货店">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/13/docker学习系列笔记[安装及启动]/" itemprop="url">docker学习系列笔记[安装及启动]</a></h1>
         
 
         <div class="post-meta">
@@ -318,8 +626,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">学习笔记</span>
+                  <a href="/categories/docker学习/" itemprop="url" rel="index">
+                    <span itemprop="name">docker学习</span>
                   </a>
                 </span>
 
@@ -602,7 +910,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -613,7 +921,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
