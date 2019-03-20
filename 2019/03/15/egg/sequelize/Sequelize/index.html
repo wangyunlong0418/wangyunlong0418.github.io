@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Sequelize 创建数据库表 | 鲁西西杂货店</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Sequelize类型Sequelize类型有很多，详情DataType。其中常用的有 STRING, TEXT, INTEGER, FLOAT, DOUBLE, DATE等。 环境搭建 创建数据库test_sequelize   1CREATE DATABASE test_sequelize DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;">
+<meta name="keywords" content="egg nodejs sequelize">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sequelize 创建数据库表">
+<meta property="og:url" content="http://yoursite.com/2019/03/15/egg/sequelize/Sequelize/index.html">
+<meta property="og:site_name" content="鲁西西杂货店">
+<meta property="og:description" content="Sequelize类型Sequelize类型有很多，详情DataType。其中常用的有 STRING, TEXT, INTEGER, FLOAT, DOUBLE, DATE等。 环境搭建 创建数据库test_sequelize   1CREATE DATABASE test_sequelize DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-03-15T00:08:03.331Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Sequelize 创建数据库表">
+<meta name="twitter:description" content="Sequelize类型Sequelize类型有很多，详情DataType。其中常用的有 STRING, TEXT, INTEGER, FLOAT, DOUBLE, DATE等。 环境搭建 创建数据库test_sequelize   1CREATE DATABASE test_sequelize DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;">
+  
+    <link rel="alternate" href="/atom.xml" title="鲁西西杂货店" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">鲁西西杂货店</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-egg/sequelize/Sequelize" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/03/15/egg/sequelize/Sequelize/" class="article-date">
+  <time datetime="2019-03-14T23:32:01.000Z" itemprop="datePublished">2019-03-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Egg学习笔记/">Egg学习笔记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Sequelize 创建数据库表
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h1 id="Sequelize"><a href="#Sequelize" class="headerlink" title="Sequelize"></a>Sequelize</h1><h3 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h3><p>Sequelize类型有很多，详情<a href="http://docs.sequelizejs.com/variable/index.html#static-variable-DataTypes" target="_blank" rel="noopener">DataType</a>。其中常用的有 <code>STRING</code>, <code>TEXT</code>, <code>INTEGER</code>, <code>FLOAT</code>, <code>DOUBLE</code>, <code>DATE</code>等。</p>
+<h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><ul>
+<li><p>创建数据库test_sequelize</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE test_sequelize DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建文件夹sequelize，执行<code>npm init</code>;</p>
+</li>
+<li><code>cd sequelize</code>,并执行<code>npm i sequelize mysql2</code>;</li>
+<li>创建以下文件夹<ul>
+<li>app/model</li>
+<li>app/db</li>
+<li>app/utils</li>
+</ul>
+</li>
+</ul>
+<h3 id="创建连接"><a href="#创建连接" class="headerlink" title="创建连接"></a>创建连接</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">// db/index.js</span><br><span class="line">const Sequelize = requeire(&apos;sequelize&apos;);</span><br><span class="line">const dbconfig = &#123;</span><br><span class="line">    username: &apos;root&apos;,  // mysql用户名</span><br><span class="line">    password: &apos;root&apos;,  // mysql 密码</span><br><span class="line">    database: &apos;sequelize_test&apos;, // 数据库名</span><br><span class="line">    port: 3306,</span><br><span class="line">    host: &apos;localhost&apos;,</span><br><span class="line">    dialect: &apos;mysql&apos; // &apos;mysql&apos;|&apos;sqlite&apos;|&apos;postgres&apos;|&apos;mssql&apos;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const &#123; username, password, database, port, host, dialect &#125; = dbconfig;</span><br><span class="line"></span><br><span class="line">const db = new Sequelize(database, username, password, &#123;</span><br><span class="line">    host,</span><br><span class="line">    port,</span><br><span class="line">    dialect,</span><br><span class="line">    pool: &#123;</span><br><span class="line">        max: 5,</span><br><span class="line">        min: 0,</span><br><span class="line">        idle: 100000</span><br><span class="line">    &#125;,</span><br><span class="line">    timezone: &apos;+08:00&apos; // 时区</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">module.exports = db;</span><br></pre></td></tr></table></figure>
+<p>###</p>
+<h3 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">const Sequelize = requeire(&apos;sequelize&apos;);</span><br><span class="line">const &#123; STRING, INTEGER &#125; = Sequelize;</span><br><span class="line">const db = require(&apos;../db&apos;);</span><br><span class="line"></span><br><span class="line">const User = db.define(&apos;user&apos;, &#123; // 表名</span><br><span class="line">    userId: &#123;</span><br><span class="line">        type: INTEGER</span><br><span class="line">    &#125;,</span><br><span class="line">    userName: &#123;</span><br><span class="line">        type: STRING</span><br><span class="line">    &#125;,</span><br><span class="line">    password: &#123;</span><br><span class="line">        type: STRING</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">const createTable = () =&gt; &#123;</span><br><span class="line">    await User.sync(&#123;</span><br><span class="line">        force: false // 设置为true，则先删除在创建</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">(async () =&gt; &#123;</span><br><span class="line">    await createTable()</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/03/15/egg/sequelize/Sequelize/" data-id="cjtgr3q1s0016b6s63u7z5qhu" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/egg-nodejs-sequelize/">egg nodejs sequelize</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2019/03/15/egg/egg-sequelize/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          egg-sequelize
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/02/01/flutter/基础Widget/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">基础Widget</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+       
+      
+      
+           <div id="gitment_comments"></div>
+    
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Sequelize"><span class="toc-number">1.</span> <span class="toc-text">Sequelize</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#类型"><span class="toc-number">1.0.1.</span> <span class="toc-text">类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#环境搭建"><span class="toc-number">1.0.2.</span> <span class="toc-text">环境搭建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建连接"><span class="toc-number">1.0.3.</span> <span class="toc-text">创建连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建表"><span class="toc-number">1.0.4.</span> <span class="toc-text">创建表</span></a></li></ol></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2019 wangyunlong&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;18410408685@163.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png">
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "e2fb4051c49842688ce669e634bc983f",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+    
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+  <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+  <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script> 
+  <script>
+  var gitment = new Gitment({
+    // id: '页面 ID', // 可选。默认为 location.href
+    owner: 'giscafer',
+    repo: 'giscafer.github.io',
+    oauth: {
+    client_id: '7e5dd6cdb9xxaxa4cf91a',
+    client_secret: '97f37d5c27c4a511xx4fxx623d391c85cb97f8',
+    }
+  })
+  gitment.render(document.getElementById("gitment_comments"))
+</script>
+
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>
