@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-06-04T10:17:07.257Z</updated>
+  <updated>2019-06-06T09:43:25.194Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,38 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>关于js Event loop和任务队列的一点理解</title>
+    <link href="http://yoursite.com/2019/06/06/%E5%85%B3%E4%BA%8Ejs-Event-loop%E5%92%8C%E4%BB%BB%E5%8A%A1%E9%98%9F%E5%88%97%E7%9A%84%E4%B8%80%E7%82%B9%E7%90%86%E8%A7%A3/"/>
+    <id>http://yoursite.com/2019/06/06/关于js-Event-loop和任务队列的一点理解/</id>
+    <published>2019-06-06T07:45:14.000Z</published>
+    <updated>2019-06-06T09:43:25.194Z</updated>
+    
+    <content type="html"><![CDATA[<p>之前在掘金上面看到很多文章都在说Event loop和事件队列，一直没有弄得很明白，直到最近几天，一个后端同学问到一个关于事件循环的问题，发现自己根本没有搞清楚，于是找了些文章，有了一些理解，在这里记录下，加深对其的理解。</p><p>首先我们来看一道题目：</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'script start'</span>); </span><br><span class="line"></span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'setTimeout'</span>);</span><br><span class="line">&#125;, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'promise1'</span>);</span><br><span class="line">    resolve();</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'promise2'</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'script end'</span>);</span><br></pre></td></tr></table></figure><p>如果对Event loop很熟悉的话，那这个自然不在话下，但是如果理解不到位的话，那可能会出一点小差错，你对了吗？</p><p>下面我们一起来看答案是什么，这里介绍两个概念：宏任务和微任务。</p><h2 id="宏任务和微任务"><a href="#宏任务和微任务" class="headerlink" title="宏任务和微任务"></a>宏任务和微任务</h2><ul><li>宏任务：包括script（整体代码）、I/O、</li><li>微任务：包括定期器、网络请求、Promise.then</li></ul><p>当函数执行栈为空的时候，去轮询事件队列，发现有事件，就拿出来执行。当遇到异步任务，比如定期器、网络请求、Promise的等都会交给异步处理模块，一旦异步函数到达其触发条件，比如定时器到时、异步请求返回时，异步处理模块将其回调函数按照类型打包压入任务队列，这个就是微任务队列。不断轮训事件队列就是事件循环（Event loop）。当所有的宏任务都执行完毕后，会去处理微任务队列。</p><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="/images/event-loop.png" alt="images" title="">                </div>                <div class="image-caption">images</div>            </figure><p>那我们回过头在继续看上面的题目，</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'script start'</span>);  <span class="comment">// 被加入到宏任务队列</span></span><br><span class="line"></span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;       <span class="comment">// 0毫秒后，回调函数被加入到微任务队列</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'setTimeout'</span>);</span><br><span class="line">&#125;, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>) </span>&#123; <span class="comment">// Promise 是宏任务，被加入到宏任务</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'promise1'</span>);</span><br><span class="line">    resolve();</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'promise2'</span>);  <span class="comment">// resolve()执行之后，加入到微任务队列</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'script end'</span>); <span class="comment">// 被加入到宏任务队列</span></span><br></pre></td></tr></table></figure><p>所以就会打印出<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">script start</span><br><span class="line">promise1</span><br><span class="line">script end</span><br><span class="line">promise2</span><br><span class="line">setTimeout</span><br></pre></td></tr></table></figure></p><h2 id="为什么Promise-then回调要比setTimeout回调先执行？"><a href="#为什么Promise-then回调要比setTimeout回调先执行？" class="headerlink" title="为什么Promise.then回调要比setTimeout回调先执行？"></a>为什么Promise.then回调要比setTimeout回调先执行？</h2><p>是因为setTimeout是只在主线程最空闲的情况下，经过一定时间去执行回调函数，所以setTimeout会被放到任务队列的最后一个，所以最晚执行。</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul><li>事件循环（Event loop）：不断从事件队列取出任务执行的过程；</li><li>事件队列：宏任务和微任务构成的队列；</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;之前在掘金上面看到很多文章都在说Event loop和事件队列，一直没有弄得很明白，直到最近几天，一个后端同学问到一个关于事件循环的问题，发现自己根本没有搞清楚，于是找了些文章，有了一些理解，在这里记录下，加深对其的理解。&lt;/p&gt;
+&lt;p&gt;首先我们来看一道题目：&lt;/p&gt;
+&lt;f
+      
+    
+    </summary>
+    
+    
+      <category term="Node" scheme="http://yoursite.com/tags/Node/"/>
+    
+      <category term="浏览器" scheme="http://yoursite.com/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
     <title>前端知识-2019-6-4</title>
-    <link href="http://yoursite.com/2019/06/04/%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86%E9%9B%86%E9%94%A6/2019-6-4/"/>
-    <id>http://yoursite.com/2019/06/04/前端知识集锦/2019-6-4/</id>
+    <link href="http://yoursite.com/2019/06/04/%E9%9D%A2%E8%AF%95%E9%A2%98%E5%BA%93/2019-6-4/"/>
+    <id>http://yoursite.com/2019/06/04/面试题库/2019-6-4/</id>
     <published>2019-06-04T10:14:19.000Z</published>
-    <updated>2019-06-04T10:17:07.257Z</updated>
+    <updated>2019-06-06T07:43:19.621Z</updated>
     
     <summary type="html">
     
