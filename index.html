@@ -58,7 +58,7 @@
           <img src="/img/avatar.jpeg">
         </a>
         <hgroup class="introduce">
-          <h5 class="nickname">wangyunlong</h5>
+          <h5 class="nickname">鲁西西</h5>
           <a href="mailto:18410408685@163.com" title="18410408685@163.com" class="mail">18410408685@163.com</a>
         </hgroup>
       </div>
@@ -141,7 +141,157 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
-            <article id="post-关于js-Event-loop和任务队列的一点理解" class="article-card article-type-post" itemprop="blogPost">
+            <article id="post-flutter/Flutter-屏幕适配" class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-06-20 13:18:53" datetime="2019-06-20T05:18:53.000Z" itemprop="datePublished">2019-06-20</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Flutter/">Flutter</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/06/20/flutter/Flutter-屏幕适配/">Flutter 屏幕适配</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        <p>flutter适配有三种方式：</p>
+<ul>
+<li>使用Scallfold</li>
+<li>SafeArea Widget</li>
+<li>MeidaQuery</li>
+</ul>
+<h3 id="使用Scallfold"><a href="#使用Scallfold" class="headerlink" title="使用Scallfold"></a>使用Scallfold</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyApp</span> <span class="keyword">extends</span> <span class="title">StateLessWidget</span> </span>&#123;</span><br><span class="line">    <span class="meta">@override</span></span><br><span class="line">    Widget build(BuildConext context) &#123;</span><br><span class="line">        retutu MaterialApp(</span><br><span class="line">            title: <span class="string">'SafeArea 适配'</span>,</span><br><span class="line">            home: scallfold(</span><br><span class="line">                appBar: AppBar(</span><br><span class="line">                    ...</span><br><span class="line">                ),</span><br><span class="line">                bottomNavigationBar:BottomNavigationBar(</span><br><span class="line">                    items: [],</span><br><span class="line">                    ...</span><br><span class="line">                  ),</span><br><span class="line">            )</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="SafeArea-Widget"><a href="#SafeArea-Widget" class="headerlink" title="SafeArea Widget"></a>SafeArea Widget</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyApp</span> <span class="keyword">extends</span> <span class="title">StateLessWidget</span> </span>&#123;</span><br><span class="line">    <span class="meta">@override</span></span><br><span class="line">    Widget build(BuildConext context) &#123;</span><br><span class="line">        retutu MaterialApp(</span><br><span class="line">            title: <span class="string">'SafeArea 适配'</span></span><br><span class="line">            home:  SafeArea(</span><br><span class="line">                child: ...,</span><br><span class="line">             ),</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="MeidaQuery"><a href="#MeidaQuery" class="headerlink" title="MeidaQuery"></a>MeidaQuery</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'package:flutter/material.dart'</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> Test(&#123;Key key&#125;) : <span class="keyword">super</span>(key: key);</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> MaterialApp(</span><br><span class="line">      home: HomePage(),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HomePage</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">final</span> EdgeInsets edgeInsets = MediaQuery.of(context).padding;</span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> implement build</span></span><br><span class="line">    <span class="keyword">return</span> Container(</span><br><span class="line">      padding: EdgeInsets.fromLTRB(<span class="number">0</span>, edgeInsets.top, <span class="number">0</span>, edgeInsets.bottom),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上三种方式均可达到ios全面屏的适配。</p>
+<p>安卓可以在/android/app/src/main/AndroidManifest.xml下增加如下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta-data</span><br><span class="line">            android:name=&quot;android.max_aspect&quot;</span><br><span class="line">            android:value=&quot;2.3&quot;</span><br><span class="line">        /&gt;</span><br></pre></td></tr></table></figure>
+<p>如遇到需要适配字体大小或者Container长宽等，可用插件去适配</p>
+<p>可查看以下博客：<a href="https://www.cnblogs.com/ckAng/p/10077832.html" target="_blank" rel="noopener">https://www.cnblogs.com/ckAng/p/10077832.html</a></p>
+
+    
+
+        <a href="/2019/06/20/flutter/Flutter-屏幕适配/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/移动端-Flutter/">移动端 Flutter</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-flutter/规则底部导航栏" class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-06-06 18:33:42" datetime="2019-06-06T10:33:42.000Z" itemprop="datePublished">2019-06-06</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Flutter/">Flutter</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/06/06/flutter/规则底部导航栏/">规则底部导航栏</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        <p>底部导航栏在我们常见的APP当中，基本都会有，那我们来看是如何进行开发的，完整demo如下：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'package:flutter/material.dart'</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">'./pages/home_page.dart'</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">'./pages/all_page.dart'</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">'./pages/me_page.dart'</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyBottomNavigation</span> <span class="keyword">extends</span> <span class="title">StatefulWidget</span> </span>&#123;</span><br><span class="line">  _MyBottomNavigationState createState() =&gt; _MyBottomNavigationState();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">_MyBottomNavigationState</span> <span class="keyword">extends</span> <span class="title">State</span>&lt;<span class="title">MyBottomNavigation</span>&gt; </span>&#123;</span><br><span class="line">  <span class="keyword">final</span> _defaultColot = Colors.grey[<span class="number">400</span>];</span><br><span class="line">  <span class="keyword">final</span> _activeColor = Colors.blueAccent;</span><br><span class="line">  <span class="built_in">int</span> _currentIndex = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  <span class="built_in">List</span>&lt;Widget&gt; _pages = <span class="keyword">new</span> <span class="built_in">List</span>();</span><br><span class="line">  <span class="keyword">void</span> initState() &#123;</span><br><span class="line">    _pages</span><br><span class="line">      ..add(HomePage())</span><br><span class="line">      ..add(AllPage())</span><br><span class="line">      ..add(MePage());</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">super</span>.initState();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> Scaffold(</span><br><span class="line">      body: _pages[_currentIndex],</span><br><span class="line">      bottomNavigationBar: BottomNavigationBar(</span><br><span class="line">        items: [</span><br><span class="line">          BottomNavigationBarItem(</span><br><span class="line">            icon: Icon(Icons.home,),</span><br><span class="line">            title: Text(<span class="string">'One'</span>,)</span><br><span class="line">          ),</span><br><span class="line">          BottomNavigationBarItem(</span><br><span class="line">            icon: Icon(Icons.border_all,),</span><br><span class="line">            title: Text(<span class="string">'All'</span>)</span><br><span class="line">          ),</span><br><span class="line">          BottomNavigationBarItem(</span><br><span class="line">            icon: Icon(Icons.person),</span><br><span class="line">            title: Text(<span class="string">'Me'</span>)</span><br><span class="line">          ),</span><br><span class="line">        ],</span><br><span class="line">        currentIndex: _currentIndex,</span><br><span class="line">        selectedItemColor: _activeColor,</span><br><span class="line">        unselectedItemColor: _defaultColot,</span><br><span class="line">        onTap: (<span class="built_in">int</span> index) &#123;</span><br><span class="line">          <span class="keyword">this</span>.setState(() &#123;</span><br><span class="line">            _currentIndex = index;</span><br><span class="line">          &#125;);</span><br><span class="line">        &#125;,</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>BottomNavigationBar 构造函数如下：<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">BottomNavigationBar(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    <span class="meta">@required</span> <span class="keyword">this</span>.items,</span><br><span class="line">    <span class="keyword">this</span>.onTap,</span><br><span class="line">    <span class="keyword">this</span>.currentIndex = <span class="number">0</span>,</span><br><span class="line">    <span class="keyword">this</span>.elevation = <span class="number">8.0</span>,</span><br><span class="line">    BottomNavigationBarType type,</span><br><span class="line">    Color fixedColor,</span><br><span class="line">    <span class="keyword">this</span>.backgroundColor,</span><br><span class="line">    <span class="keyword">this</span>.iconSize = <span class="number">24.0</span>,</span><br><span class="line">    Color selectedItemColor,</span><br><span class="line">    <span class="keyword">this</span>.unselectedItemColor,</span><br><span class="line">    <span class="keyword">this</span>.selectedFontSize = <span class="number">14.0</span>,</span><br><span class="line">    <span class="keyword">this</span>.unselectedFontSize = <span class="number">12.0</span>,</span><br><span class="line">    <span class="keyword">this</span>.showSelectedLabels = <span class="keyword">true</span>,</span><br><span class="line">    <span class="built_in">bool</span> showUnselectedLabels,</span><br></pre></td></tr></table></figure></p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>参数类型</th>
+<th>参数意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>key</strong></td>
+<td>Key</td>
+<td>Widget 标识</td>
+</tr>
+<tr>
+<td><strong>items</strong></td>
+<td>List</td>
+<td>导航列表</td>
+</tr>
+<tr>
+<td><strong>backgroundColor</strong></td>
+<td>Color</td>
+<td>背景颜色</td>
+</tr>
+<tr>
+<td>action</td>
+<td>SnackBarAction</td>
+<td>SnackBar按钮</td>
+</tr>
+<tr>
+<td>duration</td>
+<td>Duration</td>
+<td>停留时间</td>
+</tr>
+<tr>
+<td>animation</td>
+<td>Animation</td>
+<td>显示和消失动画</td>
+</tr>
+</tbody>
+</table>
+
+    
+
+        <a href="/2019/06/06/flutter/规则底部导航栏/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flutter/">Flutter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/移动端/">移动端</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-前端知识集锦/关于js-Event-loop和任务队列的一点理解" class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
         <time class="post-time" title="2019-06-06 15:45:14" datetime="2019-06-06T07:45:14.000Z" itemprop="datePublished">2019-06-06</time>
@@ -156,7 +306,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/06/06/关于js-Event-loop和任务队列的一点理解/">关于js Event loop和任务队列的一点理解</a>
+      <a class="post-title-link" href="/2019/06/06/前端知识集锦/关于js-Event-loop和任务队列的一点理解/">关于js Event loop和任务队列的一点理解</a>
     </h3>
   
 
@@ -166,12 +316,35 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        之前在掘金上面看到很多文章都在说Event loop和事件队列，一直没有弄得很明白，直到最近几天，一个后端同学问到一个关于事件循环的问题，发现自己根本没有搞清楚，于是找了些文章，有了一些理解，在这里记录下，加深对其的理解。
-首先我们来看一道题目：
-1234567891011121314console.log('script start'); setTimeout(function() &#1...
+        <p>之前在掘金上面看到很多文章都在说Event loop和事件队列，一直没有弄得很明白，直到最近几天，一个后端同学问到一个关于事件循环的问题，发现自己根本没有搞清楚，于是找了些文章，有了一些理解，在这里记录下，加深对其的理解。</p>
+<p>首先我们来看一道题目：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'script start'</span>); </span><br><span class="line"></span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'setTimeout'</span>);</span><br><span class="line">&#125;, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'promise1'</span>);</span><br><span class="line">    resolve();</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'promise2'</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'script end'</span>);</span><br></pre></td></tr></table></figure>
+<p>如果对Event loop很熟悉的话，那这个自然不在话下，但是如果理解不到位的话，那可能会出一点小差错，你对了吗？</p>
+<p>下面我们一起来看答案是什么，这里介绍两个概念：宏任务和微任务。</p>
+<h2 id="宏任务和微任务"><a href="#宏任务和微任务" class="headerlink" title="宏任务和微任务"></a>宏任务和微任务</h2><ul>
+<li>宏任务：包括script（整体代码）、I/O、</li>
+<li>微任务：包括定期器、网络请求、Promise.then</li>
+</ul>
+<p>当函数执行栈为空的时候，去轮询事件队列，发现有事件，就拿出来执行。当遇到异步任务，比如定期器、网络请求、Promise的等都会交给异步处理模块，一旦异步函数到达其触发条件，比如定时器到时、异步请求返回时，异步处理模块将其回调函数按照类型打包压入任务队列，这个就是微任务队列。不断轮训事件队列就是事件循环（Event loop）。当所有的宏任务都执行完毕后，会去处理微任务队列。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/event-loop.png" alt="images" title="">
+                </div>
+                <div class="image-caption">images</div>
+            </figure>
+<p>那我们回过头在继续看上面的题目，</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'script start'</span>);  <span class="comment">// 被加入到宏任务队列</span></span><br><span class="line"></span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;       <span class="comment">// 0毫秒后，回调函数被加入到微任务队列</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'setTimeout'</span>);</span><br><span class="line">&#125;, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>) </span>&#123; <span class="comment">// Promise 是宏任务，被加入到宏任务</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'promise1'</span>);</span><br><span class="line">    resolve();</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'promise2'</span>);  <span class="comment">// resolve()执行之后，加入到微任务队列</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'script end'</span>); <span class="comment">// 被加入到宏任务队列</span></span><br></pre></td></tr></table></figure>
+<p>所以就会打印出<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">script start</span><br><span class="line">promise1</span><br><span class="line">script end</span><br><span class="line">promise2</span><br><span class="line">setTimeout</span><br></pre></td></tr></table></figure></p>
+<h2 id="为什么Promise-then回调要比setTimeout回调先执行？"><a href="#为什么Promise-then回调要比setTimeout回调先执行？" class="headerlink" title="为什么Promise.then回调要比setTimeout回调先执行？"></a>为什么Promise.then回调要比setTimeout回调先执行？</h2><p>是因为setTimeout是只在主线程最空闲的情况下，经过一定时间去执行回调函数，所以setTimeout会被放到任务队列的最后一个，所以最晚执行。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>事件循环（Event loop）：不断从事件队列取出任务执行的过程；</li>
+<li>事件队列：宏任务和微任务构成的队列；</li>
+</ul>
+
     
 
-        <a href="/2019/06/06/关于js-Event-loop和任务队列的一点理解/" class="post-more waves-effect waves-button">
+        <a href="/2019/06/06/前端知识集锦/关于js-Event-loop和任务队列的一点理解/" class="post-more waves-effect waves-button">
             Continue reading...
         </a>
     </div>
@@ -260,12 +433,19 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        
-1.创建hello.js
-1console.log(&apos;hello&apos;)
+        <ul>
+<li><p>1.创建hello.js</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(&apos;hello&apos;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2.创建Dockerfile</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FROM scratch                        // scratch代表没有baseImage</span><br><span class="line">ADD hello.js /                      // 添加到根目录</span><br><span class="line">CMD [&quot; node hello.js &quot;]             // 执行命令</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>3.运行build命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t xxx .     // -t 表示tag xxx是tag名，.必不可少，表示在当前目录找Dockerfile</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>如果执行build命令执行成功，则构建成功，可以用<code>dockcer image ls</code>查看。</p>
 
-2.创建Dockerfile
-123FROM scratch                        // scratch代表没有baseImageADD hello.js /                      // 添加到根目录CMD [&quot; node hello.js &q...
     
 
         <a href="/2019/04/03/docker/Docker学习笔记-构建base-Image/" class="post-more waves-effect waves-button">
@@ -311,12 +491,42 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        egg-sequelize在大型应用中，我们可能需要ORM框架来帮助我们管理数据层面工具，而sequelize在node社区中被广泛使用。它支持MySql,PostgreSQL,SQLite,MSSQL等多个数据源。
-下面用demo演示如何利用egg-sequelize进行CRUD操作。
+        <h3 id="egg-sequelize"><a href="#egg-sequelize" class="headerlink" title="egg-sequelize"></a>egg-sequelize</h3><p>在大型应用中，我们可能需要ORM框架来帮助我们管理数据层面工具，而sequelize在node社区中被广泛使用。它支持<code>MySql</code>,<code>PostgreSQL</code>,<code>SQLite</code>,<code>MSSQL</code>等多个数据源。</p>
+<p>下面用demo演示如何利用egg-sequelize进行CRUD操作。</p>
+<ul>
+<li><p>初始化项目</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">egg-init --type=simple sequelize-demo</span><br><span class="line">npm i</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置config（config/config.default.js）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">config.sequelize = &#123;</span><br><span class="line">    port: 3306,</span><br><span class="line">    dialect: &apos;mysql&apos;,</span><br><span class="line">    host: &apos;localhost&apos;,</span><br><span class="line">    database: &apos;miao&apos;,</span><br><span class="line">    username: &apos;root&apos;,</span><br><span class="line">    password: &apos;123456&apos;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置插件 plugin.js（config/plugin.js）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">exports.sequelize = &#123;</span><br><span class="line">	enable: true,</span><br><span class="line">	package: ‘egg-sequelize’</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装egg-sequelize, sequelize-cli, mysql2</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i egg-sequelize sequelize-cli mysql2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>sequelize配置文件 .sequelizerc</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&apos;use strict&apos;;</span><br><span class="line">const path = require(&apos;path&apos;);</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">    config: path.join(__dirname, &apos;database/config.json&apos;),</span><br><span class="line">    &apos;migrations-path&apos;: path.join(__dirname, &apos;database/migrations&apos;), // 用来控制数据库迁移的文件夹，需要修改表结构的时候，可以通过代码来控制数据库表结构的版本回退</span><br><span class="line">    &apos;seeders-path&apos;: path.join(__dirname, &apos;database/seeders&apos;), // 是存放如何生成假数据的文件夹</span><br><span class="line">    &apos;models-path&apos;: path.join(__dirname, &apos;app/models&apos;), // 是表中字段硬度和到JS对象中的逻辑，在controller中和service中可通过this.app.model或者this.ctx.model访问</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>初始化</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npx sequelize init:config (生成database目录和配置文件config.json)</span><br><span class="line">npx sequelize init:migrations(生成database目录和子目录migrations)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">// config.json</span><br><span class="line">&#123;</span><br><span class="line">  &quot;development&quot;: &#123;</span><br><span class="line">    &quot;username&quot;: &quot;root&quot;,</span><br><span class="line">    &quot;password&quot;: &quot;123456&quot;,</span><br><span class="line">    &quot;database&quot;: &quot;miao&quot;,</span><br><span class="line">    &quot;host&quot;: &quot;localhost&quot;,</span><br><span class="line">    &quot;dialect&quot;: &quot;mysql&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;test&quot;: &#123;</span><br><span class="line">    &quot;username&quot;: &quot;root&quot;,</span><br><span class="line">    &quot;password&quot;: &quot;123456&quot;,</span><br><span class="line">    &quot;database&quot;: &quot;miao&quot;,</span><br><span class="line">    &quot;host&quot;: &quot;localhost&quot;,</span><br><span class="line">    &quot;dialect&quot;: &quot;mysql&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;production&quot;: &#123;</span><br><span class="line">    &quot;username&quot;: &quot;root&quot;,</span><br><span class="line">    &quot;password&quot;: &quot;123456&quot;,</span><br><span class="line">    &quot;database&quot;: &quot;miao&quot;,</span><br><span class="line">    &quot;host&quot;: &quot;localhost&quot;,</span><br><span class="line">    &quot;dialect&quot;: &quot;mysql&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>初始化user表<br><code>npx sequelize migration:generate --name=init-users</code>, 会在migration生成一个migration 文件(<code>${timestamp}-init-users.js</code>)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&apos;use strict&apos;;</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">  // 在执行数据库升级时调用的函数，创建 users 表</span><br><span class="line">  up: async (queryInterface, Sequelize) =&gt; &#123;</span><br><span class="line">    const &#123; INTEGER, DATE, STRING &#125; = Sequelize;</span><br><span class="line">    await queryInterface.createTable(&apos;users&apos;, &#123;</span><br><span class="line">      id: &#123; type: INTEGER, primaryKey: true, autoIncrement: true &#125;,</span><br><span class="line">      name: STRING(30),</span><br><span class="line">      age: INTEGER,</span><br><span class="line">      created_at: DATE,</span><br><span class="line">      updated_at: DATE,</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;,</span><br><span class="line">  // 在执行数据库降级时调用的函数，删除 users 表</span><br><span class="line">  down: async queryInterface =&gt; &#123;</span><br><span class="line">    await queryInterface.dropTable(&apos;users&apos;);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>升级数据库<br><code>npx sequelize db:megrate</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 如果有问题需要回滚，可以通过 `db:migrate:undo` 回退一个变更</span><br><span class="line"># npx sequelize db:migrate:undo</span><br><span class="line"># 可以通过 `db:migrate:undo:all` 回退到初始状态</span><br><span class="line"># npx sequelize db:migrate:undo:all</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建model</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// app/models/user.js</span><br><span class="line">&apos;use strict&apos;;</span><br><span class="line"></span><br><span class="line">module.exports = app =&gt; &#123;</span><br><span class="line">  const &#123; STRING, INTEGER, DATE &#125; = app.Sequelize;</span><br><span class="line"></span><br><span class="line">  const User = app.model.define(&apos;user&apos;, &#123;</span><br><span class="line">    id: &#123; type: INTEGER, primaryKey: true, autoIncrement: true &#125;,</span><br><span class="line">    name: STRING(30),</span><br><span class="line">    age: INTEGER,</span><br><span class="line">    created_at: DATE,</span><br><span class="line">    updated_at: DATE,</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  return User;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这样就可以在<code>app.model.User</code>或者 <code>ctx.model.User</code>上访问User。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">// service/user.js</span><br><span class="line">&apos;use strict&apos;;</span><br><span class="line"></span><br><span class="line">const Service = require(&apos;egg&apos;).Service;</span><br><span class="line"></span><br><span class="line">class User extends Service &#123;</span><br><span class="line">  async list(&#123; offset = 0, limit = 10 &#125;) &#123;</span><br><span class="line">    return this.ctx.model.User.findAndCountAll(&#123;</span><br><span class="line">      offset,</span><br><span class="line">      limit,</span><br><span class="line">      order: [[ &apos;created_at&apos;, &apos;desc&apos; ], [ &apos;id&apos;, &apos;desc&apos; ]],</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  // 查找</span><br><span class="line">  async find(id) &#123;</span><br><span class="line">    const user = await this.ctx.model.User.findById(id);</span><br><span class="line">    if (!user) &#123;</span><br><span class="line">      this.ctx.throw(404, &apos;user not found&apos;);</span><br><span class="line">    &#125;</span><br><span class="line">    return user;</span><br><span class="line">  &#125;</span><br><span class="line">  // 创建</span><br><span class="line">  async create(user) &#123;</span><br><span class="line">    return this.ctx.model.User.create(user);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  // 更新</span><br><span class="line">  async update(&#123; id, updates &#125;) &#123;</span><br><span class="line">    const user = await this.ctx.model.User.findById(id);</span><br><span class="line">    if (!user) &#123;</span><br><span class="line">      this.ctx.throw(404, &apos;user not found&apos;);</span><br><span class="line">    &#125;</span><br><span class="line">    return user.update(updates);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  // 删除</span><br><span class="line">  async del(id) &#123;</span><br><span class="line">    const user = await this.ctx.model.User.findById(id);</span><br><span class="line">    if (!user) &#123;</span><br><span class="line">      this.ctx.throw(404, &apos;user not found&apos;);</span><br><span class="line">    &#125;</span><br><span class="line">    return user.destroy();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module.exports = User;</span><br></pre></td></tr></table></figure></p>
 
-初始化项目
-12egg-init --type=simple sequelize-demonpm i
-...
     
 
         <a href="/2019/03/15/egg/egg-sequelize/" class="post-more waves-effect waves-button">
@@ -362,10 +572,25 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        Sequelize类型Sequelize类型有很多，详情DataType。其中常用的有 STRING, TEXT, INTEGER, FLOAT, DOUBLE, DATE等。
-环境搭建
-创建数据库test_sequelize
-  1CREATE DATABASE test_sequelize DEFAULT CHARACTER SET utf8 COLLATE utf8_general_c...
+        <h1 id="Sequelize"><a href="#Sequelize" class="headerlink" title="Sequelize"></a>Sequelize</h1><h3 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h3><p>Sequelize类型有很多，详情<a href="http://docs.sequelizejs.com/variable/index.html#static-variable-DataTypes" target="_blank" rel="noopener">DataType</a>。其中常用的有 <code>STRING</code>, <code>TEXT</code>, <code>INTEGER</code>, <code>FLOAT</code>, <code>DOUBLE</code>, <code>DATE</code>等。</p>
+<h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><ul>
+<li><p>创建数据库test_sequelize</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE test_sequelize DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建文件夹sequelize，执行<code>npm init</code>;</p>
+</li>
+<li><code>cd sequelize</code>,并执行<code>npm i sequelize mysql2</code>;</li>
+<li>创建以下文件夹<ul>
+<li>app/model</li>
+<li>app/db</li>
+<li>app/utils</li>
+</ul>
+</li>
+</ul>
+<h3 id="创建连接"><a href="#创建连接" class="headerlink" title="创建连接"></a>创建连接</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">// db/index.js</span><br><span class="line">const Sequelize = requeire(&apos;sequelize&apos;);</span><br><span class="line">const dbconfig = &#123;</span><br><span class="line">    username: &apos;root&apos;,  // mysql用户名</span><br><span class="line">    password: &apos;root&apos;,  // mysql 密码</span><br><span class="line">    database: &apos;sequelize_test&apos;, // 数据库名</span><br><span class="line">    port: 3306,</span><br><span class="line">    host: &apos;localhost&apos;,</span><br><span class="line">    dialect: &apos;mysql&apos; // &apos;mysql&apos;|&apos;sqlite&apos;|&apos;postgres&apos;|&apos;mssql&apos;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const &#123; username, password, database, port, host, dialect &#125; = dbconfig;</span><br><span class="line"></span><br><span class="line">const db = new Sequelize(database, username, password, &#123;</span><br><span class="line">    host,</span><br><span class="line">    port,</span><br><span class="line">    dialect,</span><br><span class="line">    pool: &#123;</span><br><span class="line">        max: 5,</span><br><span class="line">        min: 0,</span><br><span class="line">        idle: 100000</span><br><span class="line">    &#125;,</span><br><span class="line">    timezone: &apos;+08:00&apos; // 时区</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">module.exports = db;</span><br></pre></td></tr></table></figure>
+<p>###</p>
+<h3 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">const Sequelize = requeire(&apos;sequelize&apos;);</span><br><span class="line">const &#123; STRING, INTEGER &#125; = Sequelize;</span><br><span class="line">const db = require(&apos;../db&apos;);</span><br><span class="line"></span><br><span class="line">const User = db.define(&apos;user&apos;, &#123; // 表名</span><br><span class="line">    userId: &#123;</span><br><span class="line">        type: INTEGER</span><br><span class="line">    &#125;,</span><br><span class="line">    userName: &#123;</span><br><span class="line">        type: STRING</span><br><span class="line">    &#125;,</span><br><span class="line">    password: &#123;</span><br><span class="line">        type: STRING</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">const createTable = () =&gt; &#123;</span><br><span class="line">    await User.sync(&#123;</span><br><span class="line">        force: false // 设置为true，则先删除在创建</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">(async () =&gt; &#123;</span><br><span class="line">    await createTable()</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+
     
 
         <a href="/2019/03/15/egg/sequelize/Sequelize/" class="post-more waves-effect waves-button">
@@ -411,13 +636,14 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        1.移动开发技术简介移动开发技术简介
-2.Flutter简介Flutter是谷歌公司推出的一个移动应用开发框架，主要有跨平台、高保真、高性能等优点。基于dart语言开发，可以一套代码分别运行在IOS和Android平台上。Flutter有丰富的组件和接口。
-3.资源
-官网
-Flutter中文网
+        <h2 id="1-移动开发技术简介"><a href="#1-移动开发技术简介" class="headerlink" title="1.移动开发技术简介"></a>1.移动开发技术简介</h2><p><a href="https://book.flutterchina.club/chapter1/mobile_development_intro.html" target="_blank" rel="noopener">移动开发技术简介</a></p>
+<h2 id="2-Flutter简介"><a href="#2-Flutter简介" class="headerlink" title="2.Flutter简介"></a>2.Flutter简介</h2><p>Flutter是谷歌公司推出的一个移动应用开发框架，主要有跨平台、高保真、高性能等优点。基于dart语言开发，可以一套代码分别运行在IOS和Android平台上。Flutter有丰富的组件和接口。</p>
+<h2 id="3-资源"><a href="#3-资源" class="headerlink" title="3.资源"></a>3.资源</h2><ul>
+<li><a href="https://docs.flutter.io" target="_blank" rel="noopener">官网</a></li>
+<li><a href="https://book.flutterchina.club" target="_blank" rel="noopener">Flutter中文网</a></li>
+</ul>
+<h2 id="4-搭建开发环境"><a href="#4-搭建开发环境" class="headerlink" title="4.搭建开发环境"></a>4.搭建开发环境</h2><p><a href="https://book.flutterchina.club/chapter1/install_flutter.html" target="_blank" rel="noopener">https://book.flutterchina.club/chapter1/install_flutter.html</a></p>
 
-4.搭建开发环境https://book.flutterchina.club/chapter1...
     
 
         <a href="/2019/01/31/flutter/Flutter介绍/" class="post-more waves-effect waves-button">
@@ -501,10 +727,12 @@ Flutter中文网
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        Electron 介绍
-比你想象的更简单—对于前端人员，electron可以帮助其构建桌面应用，Electron文档上写道，只要你会写html，css，js就可以，剩下的事情交给Electron去做
+        <h2 id="Electron-介绍"><a href="#Electron-介绍" class="headerlink" title="Electron 介绍"></a>Electron 介绍</h2><ul>
+<li>比你想象的更简单—对于前端人员，electron可以帮助其构建桌面应用，Electron文档上写道，只要你会写html，css，js就可以，剩下的事情交给Electron去做</li>
+</ul>
+<h4 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/electron/electron-quick-start</span><br><span class="line"></span><br><span class="line">cd electron-quick-start </span><br><span class="line"></span><br><span class="line">npm install &amp; npm start</span><br></pre></td></tr></table></figure>
+<p>这个时候你就应该可以看到一个hello world</p>
 
-快速开始12345git clone https://github.com/electron/electron-quick-startcd electron-quick-start npm i...
     
 
         <a href="/2018/12/21/electron/Electron[快速开始]/" class="post-more waves-effect waves-button">
@@ -515,108 +743,6 @@ Flutter中文网
     <div class="post-footer">
         
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Electron/">Electron</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-docker/Docker学习笔记-镜像" class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2018-12-16 18:35:59" datetime="2018-12-16T10:35:59.000Z" itemprop="datePublished">2018-12-16</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Docker学习/">Docker学习</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2018/12/16/docker/Docker学习笔记-镜像/">Docker学习笔记-镜像</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        镜像
-获取镜像
-Docker Hub为开发者提供了数十万的镜像，可以为大家下载
-可以通过 docker pull [NAME]:[TAG], TAG如果不指定的话，会默认去拉取tag为latest的镜像，也就是最新版, docker pull可以修改下载仓库，切换到自己的私有仓库，
-  1docker pull xxx(私有仓库地址)
-
-docker pull 子命令
-  1docker p...
-    
-
-        <a href="/2018/12/16/docker/Docker学习笔记-镜像/" class="post-more waves-effect waves-button">
-            Continue reading...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-docker/Docker学习系列笔记-docker常用命令" class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2018-12-14 12:01:44" datetime="2018-12-14T04:01:44.000Z" itemprop="datePublished">2018-12-14</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Docker学习/">Docker学习</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2018/12/14/docker/Docker学习系列笔记-docker常用命令/">Docker学习系列笔记[docker常用命令]</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        #查看当前docker版本docker -v
-#查看当前本地所有镜像docker images
-#构造镜像,用法docker build -t 镜像名称 .docker build -t docker_demo .
-#用于容器与主机之间的数据拷贝。用法docker cp 主机文件地址 容器内地址。12d7f14v45cv为容器id。docker cp /www/runoob 12d7f14v...
-    
-
-        <a href="/2018/12/14/docker/Docker学习系列笔记-docker常用命令/" class="post-more waves-effect waves-button">
-            Continue reading...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li></ul>
 
     </div>
     
@@ -657,7 +783,7 @@ docker pull 子命令
         </p>
     </div>
     <div class="bottom">
-        <p><span>wangyunlong &copy; 2018 - 2019</span>
+        <p><span>鲁西西 &copy; 2018 - 2019</span>
             <span>
                 
                 <a href="http://icp.chinaz.com/info?q=luxixi.site" target="_blank">京ICP备18018105号-2</a><br>
