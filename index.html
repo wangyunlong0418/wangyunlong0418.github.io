@@ -111,7 +111,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -139,6 +139,122 @@
 <div class="container body-wrap">
 
     <ul class="post-list">
+    
+        <li class="post-list-item fade">
+            <article id="post-egg/egg-js-jwt鉴权" class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-10-12 17:36:15" datetime="2019-10-12T09:36:15.000Z" itemprop="datePublished">2019-10-12</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Egg学习笔记/">Egg学习笔记</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/10/12/egg/egg-js-jwt鉴权/">egg-js jwt鉴权</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        <h1 id="jwt"><a href="#jwt" class="headerlink" title="jwt"></a>jwt</h1><p>Json Web Token 简称为 JWT，它定义了一种用于简洁、自包含的用于通信双方之间以 JSON 对象的形式安全传递信息的方法。JWT 可以使用 HMAC 算法或者是 RSA 的公钥密钥对进行签名。</p>
+<h1 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h1><p>交互流程</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/jwt.png" alt="images" title="">
+                </div>
+                <div class="image-caption">images</div>
+            </figure>
+<h1 id="生成token"><a href="#生成token" class="headerlink" title="生成token"></a>生成token</h1><p>egg有egg-jwt的库，我这里用的是jsonwebtoken。</p>
+<ul>
+<li><p>生成公钥和私钥</p>
+<p>  私钥</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl genrsa -out rsa_private_key.pem 1024</span><br></pre></td></tr></table></figure>
+<p>  公钥</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl rsa -in rsa_private_key.pem -pubout -out rsa_public_key.pem</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>生成token</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取token</span></span><br><span class="line">getAccessToken(data, expHours) &#123;</span><br><span class="line">    <span class="keyword">const</span> seconds = (<span class="keyword">new</span> <span class="built_in">Date</span>().getTime() / <span class="number">1000</span>);</span><br><span class="line">    <span class="keyword">const</span> exp = seconds + (expHours * <span class="number">24</span> * <span class="number">60</span> * <span class="number">60</span>);</span><br><span class="line">    <span class="keyword">const</span> cert = fs.readFileSync(path.join(__dirname, <span class="string">'../keys/rsa_private_key.pem'</span>));</span><br><span class="line">    <span class="keyword">const</span> token = jwt.sign(&#123; data, exp &#125;, cert, &#123; <span class="attr">algorithm</span>: <span class="string">'RS256'</span> &#125;;</span><br><span class="line">    <span class="keyword">return</span> token;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 真实情况应该从数据库查询</span></span><br><span class="line"><span class="keyword">const</span> data = &#123; <span class="attr">username</span>: <span class="string">'zhangsan'</span>, <span class="attr">userid</span>: <span class="number">123456</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> token = getAccessToken(data, <span class="number">5</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将token存在redis</span></span><br><span class="line">app.redis.set(<span class="string">'userid'</span>, token);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="鉴权"><a href="#鉴权" class="headerlink" title="鉴权"></a>鉴权</h1><p>auth中间件<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> jwt = <span class="built_in">require</span>(<span class="string">'jsonwebtoken'</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function">(<span class="params">options, app</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">verifyToken</span>(<span class="params">token</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> cert = fs.readFileSync(path.join(__dirname, <span class="string">'../keys/rsa_public_key.pem'</span>));</span><br><span class="line">    <span class="keyword">let</span> res = &#123;&#125;;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> result = jwt.verify(token, cert, &#123; <span class="attr">algorithms</span>: [ <span class="string">'RS256'</span> ] &#125;) || &#123;&#125;;</span><br><span class="line">      <span class="keyword">const</span> &#123; exp &#125; = result;</span><br><span class="line">      <span class="keyword">const</span> now = <span class="built_in">Math</span>.floor(<span class="built_in">Date</span>.now() / <span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (now &lt;= exp) &#123;</span><br><span class="line">        res = result.data || &#123;&#125;;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">    &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(error);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">auth</span>(<span class="params">ctx, next</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> token = ctx.get(<span class="string">'Authorization'</span>);</span><br><span class="line">    <span class="comment">// const token = verifyToken(ctx.get('Authorization'));</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (token) &#123;</span><br><span class="line">      <span class="keyword">const</span> result = verifyToken(token);</span><br><span class="line">      <span class="keyword">const</span> &#123; userid &#125; = result;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (userid) &#123;</span><br><span class="line">        <span class="keyword">const</span> redis_token = <span class="keyword">await</span> app.redis.get(userid);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (token === redis_token) &#123;</span><br><span class="line">          <span class="keyword">await</span> next();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          ctx.body = <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'您已经在其他设备登录，如果继续将清除其他设备登录状态'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        ctx.status = <span class="number">401</span>;</span><br><span class="line">        ctx.body = <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'您的登录状态已过期，请重新登录'</span>);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      ctx.status = <span class="number">401</span>;</span><br><span class="line">      ctx.body = <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'您还没有登录，请需登录后进行操作'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+    
+
+        <a href="/2019/10/12/egg/egg-js-jwt鉴权/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/egg/">egg</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-服务器" class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-09-26 16:40:44" datetime="2019-09-26T08:40:44.000Z" itemprop="datePublished">2019-09-26</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/知识总结/">知识总结</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/09/26/服务器/">服务器</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        <h1 id="安装node"><a href="#安装node" class="headerlink" title="安装node"></a>安装node</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">yum install -y wget</span><br><span class="line"></span><br><span class="line">wget https://nodejs.org/dist/v9.3.0/node-v9.3.0-linux-x64.tar.xz</span><br><span class="line"></span><br><span class="line">xz -d node-v9.3.0-linux-x64.tar.xz</span><br><span class="line"></span><br><span class="line">tar -xf node-v9.3.0-linux-x64.tar</span><br><span class="line"></span><br><span class="line">ln -s ~/node-v9.3.0-linux-x64/bin/node /usr/bin/node</span><br><span class="line"></span><br><span class="line">ln -s ~/node-v9.3.0-linux-x64/bin/npm /usr/bin/npm</span><br><span class="line"></span><br><span class="line">ln -s ~/node-v9.3.0-linux-x64/bin/npm /usr/bin/npx</span><br></pre></td></tr></table></figure>
+<h1 id="安装版本管理n"><a href="#安装版本管理n" class="headerlink" title="安装版本管理n"></a>安装版本管理n</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm i -g n</span><br><span class="line">ln -s ~/node-v9.3.0-linux-x64/bin/npm /usr/bin/n</span><br></pre></td></tr></table></figure>
+<h1 id="安装Docker"><a href="#安装Docker" class="headerlink" title="安装Docker"></a>安装Docker</h1>
+    
+
+        <a href="/2019/09/26/服务器/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos/">centos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
     
         <li class="post-list-item fade">
             <article id="post-常用正则表达式" class="article-card article-type-post" itemprop="blogPost">
@@ -226,7 +342,7 @@
     
 
         <a href="/2019/07/12/常用正则表达式/" class="post-more waves-effect waves-button">
-            続きを読む…
+            Continue reading...
         </a>
     </div>
     
@@ -286,7 +402,7 @@
     
 
         <a href="/2019/06/20/flutter/Flutter-屏幕适配/" class="post-more waves-effect waves-button">
-            続きを読む…
+            Continue reading...
         </a>
     </div>
     
@@ -376,7 +492,7 @@
     
 
         <a href="/2019/06/06/flutter/规则底部导航栏/" class="post-more waves-effect waves-button">
-            続きを読む…
+            Continue reading...
         </a>
     </div>
     
@@ -445,7 +561,7 @@
     
 
         <a href="/2019/06/06/前端知识集锦/关于js-Event-loop和任务队列的一点理解/" class="post-more waves-effect waves-button">
-            続きを読む…
+            Continue reading...
         </a>
     </div>
     
@@ -491,7 +607,7 @@
     
 
         <a href="/2019/06/04/面试题库/2019-6-4/" class="post-more waves-effect waves-button">
-            続きを読む…
+            Continue reading...
         </a>
     </div>
     
@@ -549,7 +665,7 @@
     
 
         <a href="/2019/04/03/docker/Docker学习笔记-构建base-Image/" class="post-more waves-effect waves-button">
-            続きを読む…
+            Continue reading...
         </a>
     </div>
     
@@ -630,7 +746,7 @@
     
 
         <a href="/2019/03/15/egg/egg-sequelize/" class="post-more waves-effect waves-button">
-            続きを読む…
+            Continue reading...
         </a>
     </div>
     
@@ -694,7 +810,7 @@
     
 
         <a href="/2019/03/15/egg/sequelize/Sequelize/" class="post-more waves-effect waves-button">
-            続きを読む…
+            Continue reading...
         </a>
     </div>
     
@@ -702,97 +818,6 @@
         
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/egg/">egg</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sequelize/">sequelize</a></li></ul>
 
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-flutter/Flutter介绍" class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2019-01-31 18:10:06" datetime="2019-01-31T10:10:06.000Z" itemprop="datePublished">2019-01-31</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Flutter/">Flutter</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/01/31/flutter/Flutter介绍/">Flutter介绍</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        <h2 id="1-移动开发技术简介"><a href="#1-移动开发技术简介" class="headerlink" title="1.移动开发技术简介"></a>1.移动开发技术简介</h2><p><a href="https://book.flutterchina.club/chapter1/mobile_development_intro.html" target="_blank" rel="noopener">移动开发技术简介</a></p>
-<h2 id="2-Flutter简介"><a href="#2-Flutter简介" class="headerlink" title="2.Flutter简介"></a>2.Flutter简介</h2><p>Flutter是谷歌公司推出的一个移动应用开发框架，主要有跨平台、高保真、高性能等优点。基于dart语言开发，可以一套代码分别运行在IOS和Android平台上。Flutter有丰富的组件和接口。</p>
-<h2 id="3-资源"><a href="#3-资源" class="headerlink" title="3.资源"></a>3.资源</h2><ul>
-<li><a href="https://docs.flutter.io" target="_blank" rel="noopener">官网</a></li>
-<li><a href="https://book.flutterchina.club" target="_blank" rel="noopener">Flutter中文网</a></li>
-</ul>
-<h2 id="4-搭建开发环境"><a href="#4-搭建开发环境" class="headerlink" title="4.搭建开发环境"></a>4.搭建开发环境</h2><p><a href="https://book.flutterchina.club/chapter1/install_flutter.html" target="_blank" rel="noopener">https://book.flutterchina.club/chapter1/install_flutter.html</a></p>
-
-    
-
-        <a href="/2019/01/31/flutter/Flutter介绍/" class="post-more waves-effect waves-button">
-            続きを読む…
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/移动端-Flutter/">移动端 Flutter</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-electron/Electron-第一个Electron应用" class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2018-12-21 21:05:40" datetime="2018-12-21T13:05:40.000Z" itemprop="datePublished">2018-12-21</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2018/12/21/electron/Electron-第一个Electron应用/">Electron[第一个Electron应用</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        
-    
-
-        <a href="/2018/12/21/electron/Electron-第一个Electron应用/" class="post-more waves-effect waves-button">
-            続きを読む…
-        </a>
     </div>
     
 </article>
@@ -828,7 +853,7 @@
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
         </p>
     </div>
     <div class="bottom">
