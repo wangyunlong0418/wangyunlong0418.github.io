@@ -141,6 +141,218 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
+            <article id="post-css/css-grid-布局" class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-10-14 19:07:23" datetime="2019-10-14T11:07:23.000Z" itemprop="datePublished">2019-10-14</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/CSS/">CSS</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/10/14/css/css-grid-布局/">css-grid 布局</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        <h1 id="Grid布局"><a href="#Grid布局" class="headerlink" title="Grid布局"></a>Grid布局</h1><p>在目前使用最多的布局方式是Flex布局，Flex布局是轴线布局，指定子元素在轴线上的位置，而Grid布局是将容器划分为”列“和”行“，产生单元格（cell），从而确定子元素的位置。</p>
+<h1 id="几个主要的属性"><a href="#几个主要的属性" class="headerlink" title="几个主要的属性"></a>几个主要的属性</h1><p>html结构<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"grid"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"child"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"child"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"child"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"child"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"child"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"child"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"child"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"child"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"child"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>公共css<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: grid;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="grid、inline-grid"><a href="#grid、inline-grid" class="headerlink" title="grid、inline-grid"></a>grid、inline-grid</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: grid; <span class="comment">/* display: inlien-grid; */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>设置行高 grid-template-rows | 设置列高 grid-template-columns<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: grid;</span><br><span class="line">    <span class="attribute">grid-template-rows</span>: <span class="number">100px</span> <span class="number">100px</span> <span class="number">100px</span>;</span><br><span class="line">    grid-template-columns： 100px 100px 100px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="grid-template-rows-和-grid-template-columns都有很多属性："><a href="#grid-template-rows-和-grid-template-columns都有很多属性：" class="headerlink" title="grid-template-rows 和 grid-template-columns都有很多属性："></a>grid-template-rows 和 grid-template-columns都有很多属性：</h2><ol>
+<li>固定值：100px</li>
+<li>repeat 以及auto-fill</li>
+<li>fr关键字</li>
+<li>auto关键字</li>
+<li>minmax()函数</li>
+</ol>
+<h3 id="固定值"><a href="#固定值" class="headerlink" title="固定值"></a>固定值</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.contaner</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: grid;</span><br><span class="line">    <span class="attribute">grid-template-rows</span>: <span class="number">100px</span> <span class="number">100px</span> <span class="number">100px</span>;</span><br><span class="line">    grid-template-columns： 100px 100px 100px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/css/grid-template-fixed.png" alt="images" title="">
+                </div>
+                <div class="image-caption">images</div>
+            </figure>
+<h3 id="repeat函数"><a href="#repeat函数" class="headerlink" title="repeat函数"></a>repeat函数</h3><p>上面的<code>grid-template-rows: 100px 100px 100px;</code>可以使用repeat函数代替；<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.contaner</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: grid;</span><br><span class="line">    <span class="attribute">grid-template-rows</span>: <span class="built_in">repeat</span>(3, 100px);</span><br><span class="line">    <span class="attribute">grid-template-columns</span>: <span class="built_in">repeat</span>(3, 100px);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>auto-fill 是指尽可能容纳多的子元素，如果不能放下，那就自动换行。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/css/grid-repeat-auto-fill.png" alt="images" title="">
+                </div>
+                <div class="image-caption">images</div>
+            </figure>
+<h3 id="fr关键字"><a href="#fr关键字" class="headerlink" title="fr关键字"></a>fr关键字</h3><p>表示单元格之间的比例关系。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.contaner</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: grid;</span><br><span class="line">    <span class="attribute">grid-template-rows</span>: <span class="built_in">repeat</span>(3, 100px);</span><br><span class="line">    <span class="attribute">grid-template-columns</span>: <span class="number">1</span>fr <span class="number">1</span>fr <span class="number">2</span>fr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/css/grid-template-fr.png" alt="images" title="">
+                </div>
+                <div class="image-caption">images</div>
+            </figure>
+<h3 id="auto关键字"><a href="#auto关键字" class="headerlink" title="auto关键字"></a>auto关键字</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.contaner</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: grid;</span><br><span class="line">    <span class="attribute">grid-template-rows</span>: <span class="built_in">repeat</span>(3, 100px);</span><br><span class="line">    <span class="attribute">grid-template-columns</span>: <span class="number">50px</span> <span class="number">50px</span> auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>设置auto会自动计算撑满剩余空间，类似于flex布局flex：1。</p>
+<h3 id="minmax函数"><a href="#minmax函数" class="headerlink" title="minmax函数"></a>minmax函数</h3><p>设置最小最大值</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.contaner</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: grid;</span><br><span class="line">    <span class="attribute">grid-template-rows</span>: <span class="built_in">repeat</span>(3, 100px);</span><br><span class="line">    <span class="attribute">grid-template-columns</span>: <span class="number">50px</span> <span class="number">50px</span> <span class="built_in">minmax</span>(50px, 100px);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/css/grid-template-min-max.png" alt="images" title="">
+                </div>
+                <div class="image-caption">images</div>
+            </figure>
+<h2 id="grid-template-areas-划分区域"><a href="#grid-template-areas-划分区域" class="headerlink" title="grid-template-areas 划分区域"></a>grid-template-areas 划分区域</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">// html</span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"item item-a"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"item item-b"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"item item-c"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"item item-d"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">// css</span><br><span class="line">.container &#123;</span><br><span class="line">  display: grid;</span><br><span class="line">  width: 150px;</span><br><span class="line">  height: 150px;</span><br><span class="line">  grid-template-areas:</span><br><span class="line">                "a a a"</span><br><span class="line">                "b c c"</span><br><span class="line">                "b d d"</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.item-a &#123;</span><br><span class="line">  grid-area: a;</span><br><span class="line">  background: red;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.item-b &#123;</span><br><span class="line">  grid-area: b;</span><br><span class="line">  background: yellow;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.item-c &#123;</span><br><span class="line">  grid-area: c;</span><br><span class="line">  background: blue;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.item-d &#123;</span><br><span class="line">  grid-area: d;</span><br><span class="line">  background: green;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/css/grid-template-area.png" alt="images" title="">
+                </div>
+                <div class="image-caption">images</div>
+            </figure>
+<p>很明显，grid-template-areas将单元格进行了分类，子元素通过grid-area进行了分类。但是行程的区域，必须是完整的矩形，否则无效。</p>
+<h2 id="grid-row-gap-grid-column-gap-grid-gap-设置单元格之间的间距"><a href="#grid-row-gap-grid-column-gap-grid-gap-设置单元格之间的间距" class="headerlink" title="grid-row-gap | grid-column-gap | grid-gap 设置单元格之间的间距"></a>grid-row-gap | grid-column-gap | grid-gap 设置单元格之间的间距</h2><p>设置间距较为简单，简写<code>grid-gap: 10px 10px</code>，第一个对应设置行间距，第二个值对应设置列间距。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/css/grid-template-fixed.png" alt="images" title="">
+                </div>
+                <div class="image-caption">images</div>
+            </figure>
+<h2 id="justify-items-align-items-place-items-设置单元格内容的对齐方式，上中下左中右。"><a href="#justify-items-align-items-place-items-设置单元格内容的对齐方式，上中下左中右。" class="headerlink" title="justify-items | align-items | place-items 设置单元格内容的对齐方式，上中下左中右。"></a>justify-items | align-items | place-items 设置单元格内容的对齐方式，上中下左中右。</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="attribute">justify-items</span>: start | center | end | stretch;</span><br><span class="line">    <span class="attribute">align-items</span>: start | center | end | stretch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/css/对齐方式.png" alt="images" title="">
+                </div>
+                <div class="image-caption">images</div>
+            </figure>
+<p>justify-items 和 align-items所决定的是单元格子元素在单元格的位置。</p>
+<h2 id="justify-content-align-content"><a href="#justify-content-align-content" class="headerlink" title="justify-content | align-content"></a>justify-content | align-content</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="attribute">justify-content</span>: start | center | end | stretch | space-around | space-between | space-evenly;</span><br><span class="line">    <span class="attribute">align-content</span>: start | center | end | stretch | space-around | space-between | space-evenly;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>justify-content 决定列在容器内的分布情况。</p>
+<p>align-content   决定行在容器内的分布情况。</p>
+<h1 id="项目主要的属性"><a href="#项目主要的属性" class="headerlink" title="项目主要的属性"></a>项目主要的属性</h1><ul>
+<li>grid-column-start：左边框所在的垂直网格线</li>
+<li>grid-column-end：右边框所在的垂直网格线</li>
+<li>grid-row-start：上边框所在的水平网格线</li>
+<li>grid-row-end：下边框所在的水平网格线</li>
+<li>grid-row | grid-column： 缩写</li>
+<li>grid-area: 设置项目的区域名   </li>
+</ul>
+<h1 id="Grid所有属性"><a href="#Grid所有属性" class="headerlink" title="Grid所有属性"></a>Grid所有属性</h1><table>
+<thead>
+<tr>
+<th style="text-align:center">grid容器</th>
+<th style="text-align:center">grid项目</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">grid-template-columns（列宽）</td>
+<td style="text-align:center">grid-column-end</td>
+</tr>
+<tr>
+<td style="text-align:center">grid-template-rows（行高）</td>
+<td style="text-align:center">grid-column-end</td>
+</tr>
+<tr>
+<td style="text-align:center">grid-template-areas（命名网格）</td>
+<td style="text-align:center">grid-row-start</td>
+</tr>
+<tr>
+<td style="text-align:center">grid-template</td>
+<td style="text-align:center">grid-row-end</td>
+</tr>
+<tr>
+<td style="text-align:center">grid-column-gap（列间距）</td>
+<td style="text-align:center">grid-column</td>
+</tr>
+<tr>
+<td style="text-align:center">grid-row-gap（行间距）</td>
+<td style="text-align:center">grid-row</td>
+</tr>
+<tr>
+<td style="text-align:center">grid-gap</td>
+<td style="text-align:center">grid-area</td>
+</tr>
+<tr>
+<td style="text-align:center">justify-items（水平呈现方式）</td>
+<td style="text-align:center">justify-self</td>
+</tr>
+<tr>
+<td style="text-align:center">align-items（垂直呈现方式）</td>
+<td style="text-align:center">align-self</td>
+</tr>
+<tr>
+<td style="text-align:center">place-items （水平垂直呈现方式）</td>
+<td style="text-align:center">place-self</td>
+</tr>
+<tr>
+<td style="text-align:center">justify-content（水平分布方式）</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">align-content（垂直方向的分布方式）<span class="Apple-tab-span" style="white-space:pre"></span></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">place-content</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">grid-auto-columns（隐式创建列大小）</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">grid-auto-rows</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">grid-auto-flow</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">grid（网格布局）</td>
+</tr>
+</tbody>
+</table>
+
+    
+
+        <a href="/2019/10/14/css/css-grid-布局/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/布局/">布局</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
             <article id="post-egg/egg-js-jwt鉴权" class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
@@ -238,7 +450,7 @@
     
         <h1 id="安装node"><a href="#安装node" class="headerlink" title="安装node"></a>安装node</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">yum install -y wget</span><br><span class="line"></span><br><span class="line">wget https://nodejs.org/dist/v9.3.0/node-v9.3.0-linux-x64.tar.xz</span><br><span class="line"></span><br><span class="line">xz -d node-v9.3.0-linux-x64.tar.xz</span><br><span class="line"></span><br><span class="line">tar -xf node-v9.3.0-linux-x64.tar</span><br><span class="line"></span><br><span class="line">ln -s ~/node-v9.3.0-linux-x64/bin/node /usr/bin/node</span><br><span class="line"></span><br><span class="line">ln -s ~/node-v9.3.0-linux-x64/bin/npm /usr/bin/npm</span><br><span class="line"></span><br><span class="line">ln -s ~/node-v9.3.0-linux-x64/bin/npm /usr/bin/npx</span><br></pre></td></tr></table></figure>
 <h1 id="安装版本管理n"><a href="#安装版本管理n" class="headerlink" title="安装版本管理n"></a>安装版本管理n</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm i -g n</span><br><span class="line">ln -s ~/node-v9.3.0-linux-x64/bin/npm /usr/bin/n</span><br></pre></td></tr></table></figure>
-<h1 id="安装Docker"><a href="#安装Docker" class="headerlink" title="安装Docker"></a>安装Docker</h1>
+
     
 
         <a href="/2019/09/26/服务器/" class="post-more waves-effect waves-button">
@@ -746,70 +958,6 @@
     
 
         <a href="/2019/03/15/egg/egg-sequelize/" class="post-more waves-effect waves-button">
-            Continue reading...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/egg/">egg</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sequelize/">sequelize</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-egg/sequelize/Sequelize" class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2019-03-15 07:32:01" datetime="2019-03-14T23:32:01.000Z" itemprop="datePublished">2019-03-15</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Egg学习笔记/">Egg学习笔记</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/03/15/egg/sequelize/Sequelize/">Sequelize 创建数据库表</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        <h1 id="Sequelize"><a href="#Sequelize" class="headerlink" title="Sequelize"></a>Sequelize</h1><h3 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h3><p>Sequelize类型有很多，详情<a href="http://docs.sequelizejs.com/variable/index.html#static-variable-DataTypes" target="_blank" rel="noopener">DataType</a>。其中常用的有 <code>STRING</code>, <code>TEXT</code>, <code>INTEGER</code>, <code>FLOAT</code>, <code>DOUBLE</code>, <code>DATE</code>等。</p>
-<h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><ul>
-<li><p>创建数据库test_sequelize</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE test_sequelize DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>创建文件夹sequelize，执行<code>npm init</code>;</p>
-</li>
-<li><code>cd sequelize</code>,并执行<code>npm i sequelize mysql2</code>;</li>
-<li>创建以下文件夹<ul>
-<li>app/model</li>
-<li>app/db</li>
-<li>app/utils</li>
-</ul>
-</li>
-</ul>
-<h3 id="创建连接"><a href="#创建连接" class="headerlink" title="创建连接"></a>创建连接</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">// db/index.js</span><br><span class="line">const Sequelize = requeire(&apos;sequelize&apos;);</span><br><span class="line">const dbconfig = &#123;</span><br><span class="line">    username: &apos;root&apos;,  // mysql用户名</span><br><span class="line">    password: &apos;root&apos;,  // mysql 密码</span><br><span class="line">    database: &apos;sequelize_test&apos;, // 数据库名</span><br><span class="line">    port: 3306,</span><br><span class="line">    host: &apos;localhost&apos;,</span><br><span class="line">    dialect: &apos;mysql&apos; // &apos;mysql&apos;|&apos;sqlite&apos;|&apos;postgres&apos;|&apos;mssql&apos;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const &#123; username, password, database, port, host, dialect &#125; = dbconfig;</span><br><span class="line"></span><br><span class="line">const db = new Sequelize(database, username, password, &#123;</span><br><span class="line">    host,</span><br><span class="line">    port,</span><br><span class="line">    dialect,</span><br><span class="line">    pool: &#123;</span><br><span class="line">        max: 5,</span><br><span class="line">        min: 0,</span><br><span class="line">        idle: 100000</span><br><span class="line">    &#125;,</span><br><span class="line">    timezone: &apos;+08:00&apos; // 时区</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">module.exports = db;</span><br></pre></td></tr></table></figure>
-<p>###</p>
-<h3 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">const Sequelize = requeire(&apos;sequelize&apos;);</span><br><span class="line">const &#123; STRING, INTEGER &#125; = Sequelize;</span><br><span class="line">const db = require(&apos;../db&apos;);</span><br><span class="line"></span><br><span class="line">const User = db.define(&apos;user&apos;, &#123; // 表名</span><br><span class="line">    userId: &#123;</span><br><span class="line">        type: INTEGER</span><br><span class="line">    &#125;,</span><br><span class="line">    userName: &#123;</span><br><span class="line">        type: STRING</span><br><span class="line">    &#125;,</span><br><span class="line">    password: &#123;</span><br><span class="line">        type: STRING</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">const createTable = () =&gt; &#123;</span><br><span class="line">    await User.sync(&#123;</span><br><span class="line">        force: false // 设置为true，则先删除在创建</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">(async () =&gt; &#123;</span><br><span class="line">    await createTable()</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
-
-    
-
-        <a href="/2019/03/15/egg/sequelize/Sequelize/" class="post-more waves-effect waves-button">
             Continue reading...
         </a>
     </div>

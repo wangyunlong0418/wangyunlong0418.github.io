@@ -141,6 +141,70 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
+            <article id="post-egg/sequelize/Sequelize" class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-03-15 07:32:01" datetime="2019-03-14T23:32:01.000Z" itemprop="datePublished">2019-03-15</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Egg学习笔记/">Egg学习笔记</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/03/15/egg/sequelize/Sequelize/">Sequelize 创建数据库表</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        <h1 id="Sequelize"><a href="#Sequelize" class="headerlink" title="Sequelize"></a>Sequelize</h1><h3 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h3><p>Sequelize类型有很多，详情<a href="http://docs.sequelizejs.com/variable/index.html#static-variable-DataTypes" target="_blank" rel="noopener">DataType</a>。其中常用的有 <code>STRING</code>, <code>TEXT</code>, <code>INTEGER</code>, <code>FLOAT</code>, <code>DOUBLE</code>, <code>DATE</code>等。</p>
+<h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><ul>
+<li><p>创建数据库test_sequelize</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE test_sequelize DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建文件夹sequelize，执行<code>npm init</code>;</p>
+</li>
+<li><code>cd sequelize</code>,并执行<code>npm i sequelize mysql2</code>;</li>
+<li>创建以下文件夹<ul>
+<li>app/model</li>
+<li>app/db</li>
+<li>app/utils</li>
+</ul>
+</li>
+</ul>
+<h3 id="创建连接"><a href="#创建连接" class="headerlink" title="创建连接"></a>创建连接</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">// db/index.js</span><br><span class="line">const Sequelize = requeire(&apos;sequelize&apos;);</span><br><span class="line">const dbconfig = &#123;</span><br><span class="line">    username: &apos;root&apos;,  // mysql用户名</span><br><span class="line">    password: &apos;root&apos;,  // mysql 密码</span><br><span class="line">    database: &apos;sequelize_test&apos;, // 数据库名</span><br><span class="line">    port: 3306,</span><br><span class="line">    host: &apos;localhost&apos;,</span><br><span class="line">    dialect: &apos;mysql&apos; // &apos;mysql&apos;|&apos;sqlite&apos;|&apos;postgres&apos;|&apos;mssql&apos;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const &#123; username, password, database, port, host, dialect &#125; = dbconfig;</span><br><span class="line"></span><br><span class="line">const db = new Sequelize(database, username, password, &#123;</span><br><span class="line">    host,</span><br><span class="line">    port,</span><br><span class="line">    dialect,</span><br><span class="line">    pool: &#123;</span><br><span class="line">        max: 5,</span><br><span class="line">        min: 0,</span><br><span class="line">        idle: 100000</span><br><span class="line">    &#125;,</span><br><span class="line">    timezone: &apos;+08:00&apos; // 时区</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">module.exports = db;</span><br></pre></td></tr></table></figure>
+<p>###</p>
+<h3 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">const Sequelize = requeire(&apos;sequelize&apos;);</span><br><span class="line">const &#123; STRING, INTEGER &#125; = Sequelize;</span><br><span class="line">const db = require(&apos;../db&apos;);</span><br><span class="line"></span><br><span class="line">const User = db.define(&apos;user&apos;, &#123; // 表名</span><br><span class="line">    userId: &#123;</span><br><span class="line">        type: INTEGER</span><br><span class="line">    &#125;,</span><br><span class="line">    userName: &#123;</span><br><span class="line">        type: STRING</span><br><span class="line">    &#125;,</span><br><span class="line">    password: &#123;</span><br><span class="line">        type: STRING</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">const createTable = () =&gt; &#123;</span><br><span class="line">    await User.sync(&#123;</span><br><span class="line">        force: false // 设置为true，则先删除在创建</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">(async () =&gt; &#123;</span><br><span class="line">    await createTable()</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+
+    
+
+        <a href="/2019/03/15/egg/sequelize/Sequelize/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/egg/">egg</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sequelize/">sequelize</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
             <article id="post-flutter/Flutter介绍" class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
