@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-10-15T07:09:15.852Z</updated>
+  <updated>2019-10-21T08:48:15.800Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,56 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>2019-10-21</title>
+    <link href="http://yoursite.com/2019/10/21/%E9%9A%8F%E7%AC%94/2019-10-21/"/>
+    <id>http://yoursite.com/2019/10/21/随笔/2019-10-21/</id>
+    <published>2019-10-21T08:42:45.000Z</published>
+    <updated>2019-10-21T08:48:15.800Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li>一定不是看的越多越好，但是肯定需要在脑海中不断加深印象，才能对某些事情，某些东西有更好的了解。需要不断去用，以及不断的看。</li></ul><ul><li>看东西认认真真的看，不要看个红火，看了就忘，不仅浪费时间，久而久之，会产生自我怀疑的心理，学不到任何东西。</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;ul&gt;
+&lt;li&gt;一定不是看的越多越好，但是肯定需要在脑海中不断加深印象，才能对某些事情，某些东西有更好的了解。需要不断去用，以及不断的看。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;看东西认认真真的看，不要看个红火，看了就忘，不仅浪费时间，久而久之，会产生自我怀疑的心理，学不到任
+      
+    
+    </summary>
+    
+      <category term="随笔" scheme="http://yoursite.com/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+      <category term="心情记录" scheme="http://yoursite.com/tags/%E5%BF%83%E6%83%85%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>vue采坑记录</title>
+    <link href="http://yoursite.com/2019/10/16/vue/vue%E9%87%87%E5%9D%91%E8%AE%B0%E5%BD%95/"/>
+    <id>http://yoursite.com/2019/10/16/vue/vue采坑记录/</id>
+    <published>2019-10-16T09:36:02.000Z</published>
+    <updated>2019-10-16T10:35:42.053Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h1><h2 id="history模式下，二级路由开发环境下刷新404"><a href="#history模式下，二级路由开发环境下刷新404" class="headerlink" title="history模式下，二级路由开发环境下刷新404"></a>history模式下，二级路由开发环境下刷新404</h2><ul><li>在webpack.base.js output下增加publicPath: ‘/‘；<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">output: &#123;</span><br><span class="line">    path: path.resolve(__dirname, <span class="string">'../dist'</span>),</span><br><span class="line">    <span class="comment">// filename: '[name].[hash].js'</span></span><br><span class="line">    filename: <span class="string">'[name].js'</span>,</span><br><span class="line">    publicPath: <span class="string">'/'</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;坑&quot;&gt;&lt;a href=&quot;#坑&quot; class=&quot;headerlink&quot; title=&quot;坑&quot;&gt;&lt;/a&gt;坑&lt;/h1&gt;&lt;h2 id=&quot;history模式下，二级路由开发环境下刷新404&quot;&gt;&lt;a href=&quot;#history模式下，二级路由开发环境下刷新404&quot; class
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>css-grid 布局</title>
@@ -474,24 +524,6 @@
     
     
       <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>如何搭建自己的技术文档</title>
-    <link href="http://yoursite.com/2018/12/12/%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/"/>
-    <id>http://yoursite.com/2018/12/12/如何搭建自己的技术文档/</id>
-    <published>2018-12-12T01:39:36.000Z</published>
-    <updated>2018-12-12T11:30:26.016Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="node.js" scheme="http://yoursite.com/tags/node-js/"/>
     
   </entry>
   
